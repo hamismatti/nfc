@@ -1,83 +1,106 @@
-// @ts-nocheck
-
-import React from 'react';
+import React, {Component} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
-  ScrollView,
   View,
   Text,
-  StatusBar,
-  Button,
+  TextInput,
+  Alert,
+  Platform,
+  TouchableOpacity,
 } from 'react-native';
-
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-
-const App = () => {
-  return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>NFC Reader</Text>
-              <Button title="Read NFC" />
-            </View>
-          </View>
-        </ScrollView>
+import NfcManager, {NfcTech} from 'react-native-nfc-manager';
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      log: 'Ready...',
+      text: '',
+    };
+  }
+  componentDidMount() {
+    NfcManager.start();
+  }
+  componentWillUnMount() {
+    this.cleanUp();
+  }
+  cleanUp = () => {
+    NfcManager.cancelTechnologyRequest().catch(() => 0);
+  };
+  onChangeText = text => {
+    this.setState({
+      text,
+    });
+  };
+  writeData = async () => {};
+  readData = async () => {};
+  render() {
+    return (
+      <SafeAreaView style={styles.container}>
+        <TextInput
+          style={styles.textInput}
+          onChangeText={this.onChangeText}
+          autoCompleteType="off"
+          autoCapitalize="none"
+          autoCorrect={false}
+          placeholderTextColor="#888888"
+          placeholder="Enter text here"
+        />
+        <TouchableOpacity onPress={this.writeData} style={styles.buttonWrite}>
+          <Text style={styles.buttonText}>Write</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.readData} style={styles.buttonRead}>
+          <Text style={styles.buttonText}>Read</Text>
+        </TouchableOpacity>
+        <View style={styles.log}>
+          <Text>{this.state.log}</Text>
+        </View>
       </SafeAreaView>
-    </>
-  );
-};
-
+    );
+  }
+}
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
+  container: {
     flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+  textInput: {
+    marginLeft: 20,
+    marginRight: 20,
+    height: 50,
+    marginBottom: 10,
+    textAlign: 'center',
+    color: 'black',
+  },
+  buttonWrite: {
+    marginLeft: 20,
+    marginRight: 20,
+    height: 50,
+    marginBottom: 10,
     alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 8,
+    backgroundColor: '#9D2235',
   },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  buttonRead: {
+    marginLeft: 20,
+    marginRight: 20,
+    height: 50,
+    marginBottom: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 8,
+    backgroundColor: '#006C5B',
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-    marginBottom: 40,
+  buttonText: {
+    color: 'white',
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
+  log: {
+    marginTop: 30,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
-
 export default App;

@@ -64,6 +64,7 @@
 		C372A1CC0C9F909F809E749C /* libPods-nfcTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-nfcTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D23054E7CA4216F0146DEAFF /* libPods-nfc-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-nfc-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3DB7604E24E87F925CBD4A0 /* Pods-nfc-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nfc-tvOS.release.xcconfig"; path = "Target Support Files/Pods-nfc-tvOS/Pods-nfc-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		D93E00CE23BEB796009C1321 /* nfc.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = nfc.entitlements; path = nfc/nfc.entitlements; sourceTree = "<group>"; };
 		E80200CCEE098D58E3F6E916 /* Pods-nfc-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nfc-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-nfc-tvOSTests/Pods-nfc-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
@@ -125,6 +126,7 @@
 		13B07FAE1A68108700A75B9A /* nfc */ = {
 			isa = PBXGroup;
 			children = (
+				D93E00CE23BEB796009C1321 /* nfc.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -194,7 +196,6 @@
 				92E0D83FC6FBF93AAF2DC0BD /* Pods-nfcTests.debug.xcconfig */,
 				A5E5C19223956CB257DC8A08 /* Pods-nfcTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -292,6 +293,9 @@
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = 3LQN3QQQX6;
+					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
@@ -308,6 +312,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -626,8 +631,10 @@
 			baseConfigurationReference = BE251678C9D9D46F4454B7EA /* Pods-nfc.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = nfc/nfc.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = 3LQN3QQQX6;
 				INFOPLIST_FILE = nfc/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -635,7 +642,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.nfc;
 				PRODUCT_NAME = nfc;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -646,7 +653,9 @@
 			baseConfigurationReference = 978A0FC905D1CC93FE1DCFA3 /* Pods-nfc.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = nfc/nfc.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3LQN3QQQX6;
 				INFOPLIST_FILE = nfc/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -654,7 +663,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.nfc;
 				PRODUCT_NAME = nfc;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
